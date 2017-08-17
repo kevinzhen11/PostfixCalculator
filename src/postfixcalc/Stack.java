@@ -29,15 +29,32 @@ public class Stack {
 		return this.vals.get(this.top);
 	}
 	
-	public double operation(char operand){
+	public double operation(String operand){
 		double num1 = pop();
-		double num2 = pop();
 		double total = -1;
-		switch(operand){
-		case '+' : total = num1 + num2; break;
-		case '-' : total = num1 - num2; break;
-		case '*' : total = num1 * num2; break;
-		case '/': total = num1 / num2; break;
+		// lnx, logx, x^2, x^y, sinx, cosx, tanx, root, e^x
+		
+		if(operand.equals("+") || operand.equals("-") || operand.equals("*") || operand.equals("/") || operand.equals("x^y")){
+				double num2 = pop();
+			switch(operand){
+			case "+" : total = num1 + num2; break;
+			case "-" : total = num1 - num2; break;
+			case "*" : total = num1 * num2; break;
+			case "/" : total = num1 / num2; break;
+			case "x^y" : total = Math.pow(num1, num2); break;
+			}
+		}
+		else{
+			switch(operand){
+			case "lnx" : total = (-Math.log(1-num1))/num1; break;
+			case "logx" : total = Math.log(num1); break;
+			case "x^2": total = num1 * num1;
+			case "sinx" : total = Math.sin(num1); break;
+			case "cosx" : total = Math.cos(num1); break;
+			case "tanx" : total = Math.tan(num1); break;
+			case "root" : total = Math.sqrt(num1); break;
+			case "e^x" : total = Math.pow(Math.E, num1);
+			}
 		}
 		
 		push(total);
